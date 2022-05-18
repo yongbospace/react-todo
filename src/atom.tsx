@@ -10,6 +10,7 @@ export enum Categories {
   "TO_DO" = "TO_DO",
   "DOING" = "DOING",
   "DONE" = "DONE",
+  "CUSTOM" = "CUSTOM",
 }
 export interface IToDo {
   text: string;
@@ -33,6 +34,13 @@ export const toDoSelector = selector({
   get: ({ get }) => {
     const toDos = get(toDoState);
     const category = get(categoryState);
+    if (category === Categories.CUSTOM)
+      return toDos.filter(
+        (toDo) =>
+          toDo.category !== Categories.TO_DO &&
+          toDo.category !== Categories.DOING &&
+          toDo.category !== Categories.DONE
+      );
     return toDos.filter((toDo) => toDo.category === category);
   },
 });

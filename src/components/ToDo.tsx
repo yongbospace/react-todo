@@ -1,6 +1,34 @@
 import React from "react";
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { Categories, IToDo, toDoState } from "../atom";
+
+const Li = styled.li`
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+`;
+
+const SpanCategory = styled.span`
+  border: 1px solid ${(props) => props.theme.textColor};
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+`;
+
+const Buttons = styled.div`
+  button {
+    background-color: transparent;
+    color: ${(props) => props.theme.textColor};
+    border: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+`;
 
 function ToDo({ text, id, category }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -28,25 +56,28 @@ function ToDo({ text, id, category }: IToDo) {
     });
   };
   return (
-    <li>
+    <Li>
+      <SpanCategory>{category}</SpanCategory>
       <span>{text}</span>
-      {category !== Categories.TO_DO && (
-        <button name={Categories.TO_DO} onClick={onClick}>
-          To Do
-        </button>
-      )}
-      {category !== Categories.DOING && (
-        <button name={Categories.DOING} onClick={onClick}>
-          Doing
-        </button>
-      )}
-      {category !== Categories.DONE && (
-        <button name={Categories.DONE} onClick={onClick}>
-          Done
-        </button>
-      )}
-      <button onClick={deleteToDo}>Delete</button>
-    </li>
+      <Buttons>
+        {category !== Categories.TO_DO && (
+          <button name={Categories.TO_DO} onClick={onClick}>
+            todo
+          </button>
+        )}
+        {category !== Categories.DOING && (
+          <button name={Categories.DOING} onClick={onClick}>
+            doing
+          </button>
+        )}
+        {category !== Categories.DONE && (
+          <button name={Categories.DONE} onClick={onClick}>
+            done
+          </button>
+        )}
+        <button onClick={deleteToDo}>❌</button>
+      </Buttons>
+    </Li>
   );
 }
 
