@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/react-todo/static/js/main.debbe52e.js",
+    "index.html": "/react-todo/index.html",
+    "main.debbe52e.js.map": "/react-todo/static/js/main.debbe52e.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.debbe52e.js"
+  ]
+}
